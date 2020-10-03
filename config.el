@@ -55,6 +55,11 @@
 ;; My projects
 (projectile-add-known-project "~/Documents/Unnamed-GameEngine/")
 (projectile-add-known-project "~/.minecraft/shaderpacks/Upstairs-Shaders")
+(projectile-add-known-project "~/Documents/NotesShaders/")
+(projectile-add-known-project "~/Documents/Uni2020/Calculo")
+(projectile-add-known-project "~/Documents/Uni2020/Signals")
+(projectile-add-known-project "~/Documents/ShaderCodeParser")
+
 
 ;; Disable cache when the project is loading
 (add-hook 'projectile-after-switch-project-hook (lambda ()
@@ -64,8 +69,16 @@
 (require 'company)
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
+
+(require 'company)
+(add-to-list 'company-backends 'company-glsl)
+
+;; (autoload 'ext-glsl-mode (and (glsl-mode) (lsp-completion--enable)))
 (add-to-list 'auto-mode-alist '("\\.fsh\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.vsh\\'" . glsl-mode))
+
+;;(add-to-list 'ac-mode 'glsl-mode)
+(setq ac-modes '(glsl-mode))
 
 ;; GLSL utils
 (defun glsl-create-shader(name)
@@ -74,6 +87,11 @@
   (shell-command (concat "touch " (concat name ".fsh")))
   (shell-command (concat "touch " (concat name ".vsh")))
   (message "Bada-bing shaders for ya %s" name))
+
+(defun glsl-duplicate-shader(name dest_name)
+  (interactive "sShader name: \nsDestination Shader name: ")
+  (shell-command (concat "cp " (concat name (concat ".vsh " (concat dest_name ".vsh")))))
+  (shell-command (concat "cp " (concat name (concat ".fsh " (concat dest_name ".fsh"))))))
 
 ;; (add-function #'glsl-create-shader)
 
