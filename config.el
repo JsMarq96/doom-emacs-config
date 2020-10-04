@@ -53,13 +53,17 @@
 ;; they are implemented.
 
 ;; My projects
-(projectile-add-known-project "~/Documents/Unnamed-GameEngine/")
+;; Projects paths for my desktop of laptop machine
+;; TODO set the shame lenguage and directories for both
+(if (string= "Briareos" (system-name)) ;; This is executing on my Desktop computer
+    (progn (projectile-add-known-project "~/Documentos/Unnamed-GameEngine/"))
+    (progn (projectile-add-known-project "~/Documents/Unnamed-GameEngine/")
+           (projectile-add-known-project "~/Documents/NotesShaders/")
+           (projectile-add-known-project "~/Documents/Uni2020/Calculo")
+           (projectile-add-known-project "~/Documents/Uni2020/Signals")
+           (projectile-add-known-project "~/Documents/ShaderCodeParser"))
+  )
 (projectile-add-known-project "~/.minecraft/shaderpacks/Upstairs-Shaders")
-(projectile-add-known-project "~/Documents/NotesShaders/")
-(projectile-add-known-project "~/Documents/Uni2020/Calculo")
-(projectile-add-known-project "~/Documents/Uni2020/Signals")
-(projectile-add-known-project "~/Documents/ShaderCodeParser")
-
 
 ;; Disable cache when the project is loading
 (add-hook 'projectile-after-switch-project-hook (lambda ()
